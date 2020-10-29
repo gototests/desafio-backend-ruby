@@ -1,0 +1,4 @@
+desk: &desk
+  id: 1
+  name: "desk"
+  price: 40000
