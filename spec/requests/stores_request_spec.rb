@@ -1,24 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe 'Products', type: :request do
-  fixtures(:product)
+RSpec.describe "Stores", type: :request do
+  fixtures(:store)
 
-  describe 'GET /products/:id' do
-    context 'when product exists' do
-      before { get "/products/#{1}" }
+  describe 'GET /stores/:id' do
+    context 'when store exists' do
+      before { get "/stores/#{1}" }
 
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
 
-      it 'returns the product' do
-        expect(json_body[:product]).to be_present
-        expect(json_body[:product][:id]).to eq(1)
+      it 'returns the store' do
+        expect(json_body[:store]).to be_present
+        expect(json_body[:store][:id]).to eq(1)
       end
     end
 
-    context 'when product does not exists' do
-      before { get '/products/XXXXXXX' }
+    context 'when store does not exists' do
+      before { get '/stores/XXXXXXX' }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
@@ -26,28 +26,28 @@ RSpec.describe 'Products', type: :request do
     end
   end
 
-  describe 'POST /products' do
+  describe 'POST /stores' do
     before do
-      post '/products', params: { product: product_params }
+      post '/stores', params: { store: store_params }
     end
 
     context 'when params are valid' do
-      let(:product_params) do
-        { name: 'Cable', price: 10000 }
+      let(:store_params) do
+        { name: 'Cable', address: "Moon" }
       end
 
       it 'returns stauts code 201' do
         expect(response).to have_http_status(201)
       end
 
-      it 'returns the created product' do
-        expect(json_body[:product]).to be_present
-        expect(json_body[:product][:name]).to eq(product_params[:name])
+      it 'returns the created store' do
+        expect(json_body[:store]).to be_present
+        expect(json_body[:store][:name]).to eq(store_params[:name])
       end
     end
 
     context 'when params are invalid' do
-      let(:product_params) do
+      let(:store_params) do
         { name: nil }
       end
 
@@ -61,30 +61,30 @@ RSpec.describe 'Products', type: :request do
     end
   end
 
-  describe 'PUT /products/:id' do
-    let(:product_id) { 1 }
+  describe 'PUT /stores/:id' do
+    let(:store_id) { 1 }
 
     before do
-      put "/products/#{product_id}", params: { product: product_params }
+      put "/stores/#{store_id}", params: { store: store_params }
     end
 
     context 'when params are valid' do
-      let(:product_params) do
-        { price: 20000 }
+      let(:store_params) do
+        { address: "Sun" }
       end
 
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
 
-      it 'returns updated product' do
-        expect(json_body[:product][:price]).to eq(product_params[:price])
+      it 'returns updated store' do
+        expect(json_body[:store][:address]).to eq(store_params[:address])
       end
     end
 
     context 'when params are invalid' do
-      let(:product_params) do
-        { price: nil }
+      let(:store_params) do
+        { name: nil }
       end
 
       it 'returns status code 422' do
@@ -93,14 +93,14 @@ RSpec.describe 'Products', type: :request do
 
       it 'returns errors message' do
         expect(json_body[:errors]).to be_present
-        expect(json_body[:errors][:price]).to include("can't be blank")
+        expect(json_body[:errors][:name]).to include("can't be blank")
       end
     end
   end
 
-  describe 'DELETE /products/:id' do
-    let(:product_id) { 1 }
-    before { delete "/products/#{product_id}" }
+  describe 'DELETE /stores/:id' do
+    let(:store_id) { 1 }
+    before { delete "/stores/#{store_id}" }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

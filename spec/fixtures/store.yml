@@ -1,0 +1,5 @@
+store: &store
+  id: 1
+  name: "Signos"
+  address: "Mercurio"
+
