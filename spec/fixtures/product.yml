@@ -2,3 +2,8 @@ desk: &desk
   id: 1
   name: "desk"
   price: 40000
+
+cable: &cable
+  id: 2
+  name: "cable"
+  price: 40000

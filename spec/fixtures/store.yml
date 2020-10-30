@@ -3,3 +3,8 @@ store: &store
   name: "Signos"
   address: "Mercurio"
 
+store2: &store2
+  id: 2
+  name: "Signos"
+  address: "Mercurio"
+
