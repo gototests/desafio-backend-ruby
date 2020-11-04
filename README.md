@@ -26,6 +26,9 @@ $ rails db:migrate
 $ bundle exec rspec
 ```
 
+## Heroku application
+
+https://stock-nexas.herokuapp.com/
 
 ## API Documentation Insomnia
 
